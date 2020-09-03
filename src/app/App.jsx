@@ -2,13 +2,14 @@ import React from "react"
 
 import "app/App.css"
 
-import HomePage from "app/views/HomePage"
+import HomePage from "app/pages/homepage/HomePage"
 
 function App() {
-  return (<div>
-    <h1>Hello, world!</h1>
-    <HomePage></HomePage>
-  </div>)
+  return (
+    <div>
+      <HomePage />
+    </div>
+  )
 }
 
 export default App

@@ -4,7 +4,7 @@ import MenuItem from "app/components/menu-item/MenuItem"
 
 import "app/components/menu/menu.scss"
 
-const Menu = ({ children }) => {
+const Menu = () => {
   const [sections, setSections] = useState([])
 
   useEffect(() => {
@@ -47,13 +47,8 @@ const Menu = ({ children }) => {
 
   return (
     <div className="menu">
-      {sections.map((section) => (
-        <MenuItem
-          key={section.id}
-          title={section.title}
-          background={section.imageUrl}
-          size={section.size}
-        />
+      {sections.map(({ id, ...sectionProps }) => (
+        <MenuItem key={id} {...sectionProps} />
       ))}
     </div>
   )

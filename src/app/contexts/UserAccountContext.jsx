@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext } from "react"
 
-import { auth } from "firebase/firebase.utils"
+import { auth, createUserProfileDocument } from "firebase/firebase.utils"
 
 const UserAccountContext = createContext()
 
@@ -8,9 +8,16 @@ const UserAccountContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      setUser(user)
-      console.log(user)
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+
+        userRef.onSnapshot((snapshot) => {
+          setUser({ id: snapshot.id, ...snapshot.data() })
+        })
+      } else {
+        setUser(userAuth)
+      }
     })
 
     return () => unsubscribeFromAuth()

@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import FormInput from "app/components/form-input/FormInput"
 import CustomButton from "app/components/custom-button/CustomButton"
 
-import { auth, createUserProfileDocument } from "firebase/firebase.utils"
+import { userAccountService } from "app/services/UserAccountService"
 
 import "app/components/sign-up-form/sign-up-form.scss"
 
@@ -21,19 +21,15 @@ const SignUpForm = () => {
     }
 
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      )
-      await createUserProfileDocument(user, { displayName })
+      await userAccountService.signUp({ email, password, displayName })
+
+      setDisplayName("")
+      setEmail("")
+      setPassword("")
+      setConfirmedPassword("")
     } catch (error) {
       console.error(error)
     }
-
-    setDisplayName("")
-    setEmail("")
-    setPassword("")
-    setConfirmedPassword("")
   }
 
   const handleDisplayNameChange = (event) => {

@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import FormInput from "app/components/form-input/FormInput"
 import CustomButton from "app/components/custom-button/CustomButton"
 
-import { auth, signInWithGoogle } from "firebase/firebase.utils"
+import { userAccountService } from "app/services/UserAccountService"
 
 import "app/components/sign-in-form/sign-in-form.scss"
 
@@ -15,8 +15,8 @@ const SignInForm = () => {
     event.preventDefault()
 
     try {
-      await auth.signInWithEmailAndPassword(email, password)
-      
+      await userAccountService.signInWithEmailAndPassword(email, password)
+
       setEmail("")
       setPassword("")
     } catch (error) {
@@ -32,6 +32,10 @@ const SignInForm = () => {
   const handlePasswordChange = (event) => {
     const password = event.target.value
     setPassword(password)
+  }
+
+  const handleSignInWithGoogle = () => {
+    userAccountService.signInWithGoogleAccount()
   }
 
   return (
@@ -64,7 +68,7 @@ const SignInForm = () => {
           </CustomButton>
 
           <CustomButton
-            onClick={signInWithGoogle}
+            onClick={handleSignInWithGoogle}
             oAuthButton
             value="Submit form"
           >

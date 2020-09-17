@@ -16,7 +16,11 @@ class UserAccountService {
   }
 
   async signInWithGoogleAccount() {
-    signInWithGoogle()
+    await signInWithGoogle()
+  }
+
+  async signOut() {
+    await auth.signOut()
   }
 }
 

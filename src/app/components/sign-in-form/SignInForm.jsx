@@ -70,6 +70,7 @@ const SignInForm = () => {
           <CustomButton
             onClick={handleSignInWithGoogle}
             oAuthButton
+            type="button"
             value="Submit form"
           >
             Sign in with Google

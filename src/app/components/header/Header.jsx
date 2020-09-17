@@ -1,13 +1,19 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { connect, useSelector } from "react-redux"
+
+import { userAccountService } from "app/services/UserAccountService"
 
 import { ReactComponent as Logo } from "app/assets/crown.svg"
-
-import { auth } from "firebase/firebase.utils"
-
 import "app/components/header/header.scss"
 
-const Header = ({ currentUser }) => {
+const Header = () => {
+  const currentUser = useSelector((state) => state.userAccount.currentUser)
+
+  const handleSignOut = async () => {
+    await userAccountService.signOut()
+  }
+
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -21,7 +27,7 @@ const Header = ({ currentUser }) => {
           CONTACT
         </Link>
         {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
+          <div className="option" onClick={handleSignOut}>
             SIGN OUT
           </div>
         ) : (
@@ -34,4 +40,8 @@ const Header = ({ currentUser }) => {
   )
 }
 
-export default Header
+const mapStateToProps = (state) => ({
+  currentUser: state.userAccount.currentUser,
+})
+
+export default connect(mapStateToProps)(Header)

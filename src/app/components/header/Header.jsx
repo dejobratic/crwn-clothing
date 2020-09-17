@@ -40,8 +40,4 @@ const Header = () => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.userAccount.currentUser,
-})
-
-export default connect(mapStateToProps)(Header)
+export default Header

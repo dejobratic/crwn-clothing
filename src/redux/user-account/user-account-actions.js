@@ -1,6 +1,6 @@
-import { SET_CURRENT_USER } from "redux/user-account/user-account-reducer"
+export const SET_CURRENT_USER = "SET_CURRENT_USER"
 
-export const setCurrentUser = (user) => ({
+export const setCurrentUser = (currentUser) => ({
   type: SET_CURRENT_USER,
-  payload: user,
+  payload: currentUser,
 })

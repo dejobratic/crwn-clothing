@@ -1,6 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { connect, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
+
+import CartIcon from "app/components/cart-icon/CartIcon"
+import CartDropdown from "app/components/cart-dropdown/CartDropdown"
 
 import { userAccountService } from "app/services/UserAccountService"
 
@@ -9,6 +12,8 @@ import "app/components/header/header.scss"
 
 const Header = () => {
   const currentUser = useSelector((state) => state.userAccount.currentUser)
+
+  const isCartVisible = useSelector((state) => state.cart.isVisible)
 
   const handleSignOut = async () => {
     await userAccountService.signOut()
@@ -35,7 +40,9 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
+        <CartIcon className="option" />
       </div>
+      {isCartVisible ? <CartDropdown /> : <></>}
     </div>
   )
 }

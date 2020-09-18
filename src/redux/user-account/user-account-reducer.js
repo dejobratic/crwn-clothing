@@ -1,8 +1,8 @@
+import { SET_CURRENT_USER } from "redux/user-account/user-account-actions"
+
 const INITIAL_STATE = {
   currentUser: null,
 }
-
-export const SET_CURRENT_USER = "SET_CURRENT_USER"
 
 export const userAccountReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {

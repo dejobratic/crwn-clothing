@@ -15,7 +15,7 @@ import "app/App.scss"
 
 const App = () => {
   const currentUser = useSelector((state) => state.userAccount.currentUser)
-  const dispatch = useDispatch()
+  const dispatchCurrentUser = useDispatch()
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -23,10 +23,12 @@ const App = () => {
         const userRef = await createUserProfileDocument(userAuth)
 
         userRef.onSnapshot((snapshot) => {
-          dispatch(setCurrentUser({ id: snapshot.id, ...snapshot.data() }))
+          dispatchCurrentUser(
+            setCurrentUser({ id: snapshot.id, ...snapshot.data() })
+          )
         })
       } else {
-        dispatch(setCurrentUser(userAuth))
+        dispatchCurrentUser(setCurrentUser(userAuth))
       }
     })
 

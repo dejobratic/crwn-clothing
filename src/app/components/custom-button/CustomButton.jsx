@@ -2,9 +2,14 @@ import React from "react"
 
 import "app/components/custom-button/custom-button.scss"
 
-const CustomButton = ({ children, oAuthButton, ...otherProps }) => {
+const CustomButton = ({ children, oAuthButton, inverted, ...otherProps }) => {
   return (
-    <button className={`${oAuthButton ? 'o-auth-button' : ''} custom-button`} {...otherProps}>
+    <button
+      className={`${inverted ? "inverted" : ""} ${
+        oAuthButton ? "o-auth-button" : ""
+      } custom-button`}
+      {...otherProps}
+    >
       {children}
     </button>
   )

@@ -7,7 +7,7 @@ import HomePage from "app/pages/home/HomePage"
 import ShopPage from "app/pages/shop/ShopPage"
 import UserAccountPage from "app/pages/user-account/UserAccountPage"
 
-import { setCurrentUser } from "redux/user-account/user-account-actions"
+import { setCurrentUser } from "redux/user-account/user-account.actions"
 
 import { auth, createUserProfileDocument } from "firebase/firebase.utils"
 
@@ -33,7 +33,7 @@ const App = () => {
     })
 
     return () => unsubscribeFromAuth()
-  }, [])
+  }, [dispatchCurrentUser])
 
   return (
     <>

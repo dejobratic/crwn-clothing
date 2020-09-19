@@ -1,4 +1,4 @@
-import { cartAction } from "redux/cart/cart-actions"
+import { cartAction } from "redux/cart/cart.actions"
 
 import { addItemToCart } from "redux/cart/cart.utils"
 

@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from "redux/user-account/user-account-actions"
+import { SET_CURRENT_USER } from "redux/user-account/user-account.actions"
 
 const INITIAL_STATE = {
   currentUser: null,

@@ -1,16 +1,15 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
 
-import { toggleCartVisibility } from "redux/cart/cart-actions"
+import { toggleCartVisibility } from "redux/cart/cart.actions"
+import { selectCartItemsCount } from "redux/cart/cart.selectors"
 
 import { ReactComponent as ShoppingBagIcon } from "app/assets/shopping-bag.svg"
 import "app/components/cart-icon/cart-icon.scss"
 
 const CartIcon = () => {
-  const cartItems = useSelector((state) => state.cart.items)
+  const cartItemCount = useSelector(selectCartItemsCount)
   const dispatch = useDispatch()
-
-  const totalItems = cartItems.reduce((a, b) => a + (b['quantity'] || 0), 0)
 
   const handleToggleCartVisibility = () => {
     dispatch(toggleCartVisibility())
@@ -18,7 +17,7 @@ const CartIcon = () => {
   return (
     <div className="cart-icon" onClick={handleToggleCartVisibility}>
       <ShoppingBagIcon className="shopping-bag-icon" />
-      <span className="item-count">{totalItems}</span>
+      <span className="item-count">{cartItemCount}</span>
     </div>
   )
 }

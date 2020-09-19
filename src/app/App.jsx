@@ -8,13 +8,14 @@ import ShopPage from "app/pages/shop/ShopPage"
 import UserAccountPage from "app/pages/user-account/UserAccountPage"
 
 import { setCurrentUser } from "redux/user-account/user-account.actions"
+import { selectCurrentUser } from "redux/user-account/user-account.selectors"
 
 import { auth, createUserProfileDocument } from "firebase/firebase.utils"
 
 import "app/App.scss"
 
 const App = () => {
-  const currentUser = useSelector((state) => state.userAccount.currentUser)
+  const currentUser = useSelector(selectCurrentUser)
   const dispatchCurrentUser = useDispatch()
 
   useEffect(() => {

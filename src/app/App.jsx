@@ -6,6 +6,7 @@ import Header from "app/components/header/Header"
 import HomePage from "app/pages/home/HomePage"
 import ShopPage from "app/pages/shop/ShopPage"
 import UserAccountPage from "app/pages/user-account/UserAccountPage"
+import CheckoutPage from "app/pages/checkout/CheckoutPage"
 
 import { setCurrentUser } from "redux/user-account/user-account.actions"
 import { selectCurrentUser } from "redux/user-account/user-account.selectors"
@@ -42,6 +43,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop/" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
         <Route
           exact
           path="/signin"

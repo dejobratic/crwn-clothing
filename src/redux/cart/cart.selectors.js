@@ -18,3 +18,7 @@ export const selectIsCartVisible = createSelector(
   [selectCart],
   (cart) => cart.isVisible
 )
+
+export const selectCartTotal = createSelector([selectCartItems], (items) =>
+  items.reduce((totalPrice, currentItem) => totalPrice + currentItem.price, 0)
+)

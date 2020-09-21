@@ -1,26 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
+import { Route } from "react-router-dom"
 
-import CollectionPreview from "app/components/collection-preview/CollectionPreview"
+import CollectionsOverview from "app/components/collections-overview/CollectionsOverview"
+import CollectionPage from "app/pages/collection/CollectionPage"
 
-import { shopService } from "app/services/ShopService"
-
-const ShopPage = () => {
-  const [collections, setCollections] = useState([])
-
-  useEffect(() => {
-    const getData = async () => {
-      const collections = await shopService.getAllCollections()
-      setCollections(collections)
-    }
-
-    getData()
-  }, [])
-
+const ShopPage = ({ match }) => {
   return (
     <div className="shop-page">
-      {collections.map(({ id, ...collectionProps }) => (
-        <CollectionPreview key={id} {...collectionProps} />
-      ))}
+      <Route exact path={`${match.path}`} component={CollectionsOverview} />
+      <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
     </div>
   )
 }

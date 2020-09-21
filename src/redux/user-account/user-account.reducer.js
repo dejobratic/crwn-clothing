@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   currentUser: null,
 }
 
-export const userAccountReducer = (state = INITIAL_STATE, action) => {
+const userAccountReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return { ...state, currentUser: action.payload }
@@ -12,3 +12,5 @@ export const userAccountReducer = (state = INITIAL_STATE, action) => {
       return state
   }
 }
+
+export default userAccountReducer

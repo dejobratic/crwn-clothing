@@ -68,10 +68,10 @@ const SignInForm = () => {
           </CustomButton>
 
           <CustomButton
-            onClick={handleSignInWithGoogle}
-            oAuthButton
             type="button"
             value="Submit form"
+            googleSignIn
+            onClick={handleSignInWithGoogle}
           >
             Sign in with Google
           </CustomButton>

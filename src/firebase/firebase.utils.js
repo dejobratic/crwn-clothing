@@ -15,23 +15,40 @@ const config = {
 }
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (userAuth) {
-    const userRef = firestore.doc(`users/${userAuth.uid}`)
-    const snapshot = await userRef.get()
+  if (!userAuth) return
 
-    if (!snapshot.exists) {
-      const { displayName, email } = userAuth
-      const createdAt = new Date()
+  const userRef = firestore.doc(`users/${userAuth.uid}`)
+  const userSnapshot = await userRef.get()
 
-      try {
-        await userRef.set({ displayName, email, createdAt, ...additionalData })
-      } catch (error) {
-        console.error("error creating user", error.message)
-      }
+  if (!userSnapshot.exists) {
+    const { displayName, email } = userAuth
+    const createdAt = new Date()
+
+    try {
+      await userRef.set({ displayName, email, createdAt, ...additionalData })
+    } catch (error) {
+      console.error("error creating user", error.message)
     }
-
-    return userRef
   }
+
+  return userRef
+}
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey)
+  console.log({ collectionRef })
+
+  const batch = firestore.batch()
+
+  objectsToAdd.forEach((element) => {
+    const newDocRef = collectionRef.doc()
+    batch.set(newDocRef, element)
+  })
+
+  return await batch.commit()
 }
 
 firebase.initializeApp(config)

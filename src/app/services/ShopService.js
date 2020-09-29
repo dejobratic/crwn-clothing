@@ -3,14 +3,8 @@ import { firestore } from "firebase/firebase.utils"
 class ShopService {
   async getAllCollections() {
     const collectionRef = firestore.collection("collections")
-
     const collectionSnapshot = await collectionRef.get()
     return convertToShopCollectionMap(collectionSnapshot)
-
-    //TODO: investigate more on onSnapshot vs get
-    collectionRef.onSnapshot(async (collectionSnapshot) => {
-      return convertToShopCollectionMap(collectionSnapshot)
-    })
   }
 }
 

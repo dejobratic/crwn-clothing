@@ -1,7 +1,10 @@
 import React from "react"
+import { compose } from "redux"
 import { useSelector } from "react-redux"
+import { withRouter } from "react-router-dom"
 
 import CollectionItem from "app/components/collection-item/CollectionItem"
+import withCollectionsLoading from "app/components/with-collections-loading/WithCollectionsLoading"
 
 import { selectShopCollection } from "redux/shop/shop.selectors"
 
@@ -25,4 +28,6 @@ const CollectionPage = ({ match }) => {
   )
 }
 
-export default CollectionPage
+const withWrappers = compose(withCollectionsLoading, withRouter)
+
+export default withWrappers(CollectionPage)

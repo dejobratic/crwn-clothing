@@ -6,7 +6,6 @@ import {
 } from "app/components/with-spinner/WithSpinner.styles"
 
 const CustomSpinner = () => {
-  console.log("spinning")
   return (
     <SpinnerOverlay>
       <SpinnerContainer />

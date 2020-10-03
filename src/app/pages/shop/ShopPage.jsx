@@ -5,17 +5,13 @@ import { useDispatch } from "react-redux"
 import CollectionsOverview from "app/components/collections-overview/CollectionsOverview"
 import CollectionPage from "app/pages/collection/CollectionPage"
 
-import { loadShopCollectionsAsync } from "redux/shop/shop.actions"
+import { loadShopCollectionsStart } from "redux/shop/shop.actions"
 
 const ShopPage = ({ match }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const loadShopCollections = async () => {
-      dispatch(await loadShopCollectionsAsync())
-    }
-
-    loadShopCollections()
+    dispatch(loadShopCollectionsStart())
   }, [dispatch])
 
   return (

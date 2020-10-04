@@ -2,17 +2,18 @@ import { shopAction } from "redux/shop/shop.actions"
 
 const INITIAL_STATE = {
   collections: {},
-  errorMessage: undefined,
-  isLoadingCollections: true,
+  errorMessage: null,
+  isLoadingCollections: true, //TODO: change to areCollectionsLoaded
 }
 
 const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case shopAction.LOAD_COLLECTIONS_START:
-      return { ...state, isLoadingCollections: true }
+      return { ...state, errorMessage: null, isLoadingCollections: true }
     case shopAction.LOAD_COLLECTIONS_SUCCESS:
       return {
         ...state,
+        errorMessage: null,
         isLoadingCollections: false,
         collections: action.payload,
       }

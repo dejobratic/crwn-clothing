@@ -1,27 +1,24 @@
 import React, { useState } from "react"
+import { useDispatch } from "react-redux"
 
 import FormInput from "app/components/form-input/FormInput"
 import CustomButton from "app/components/custom-button/CustomButton"
 
-import { userAccountService } from "app/services/UserAccountService"
+import {
+  signInWithEmailAndPasswordStart,
+  signInWithGoogleStart,
+} from "redux/user-account/user-account.actions"
 
 import "app/components/sign-in-form/sign-in-form.scss"
 
 const SignInForm = () => {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-
-    try {
-      await userAccountService.signInWithEmailAndPassword(email, password)
-
-      setEmail("")
-      setPassword("")
-    } catch (error) {
-      console.error(error)
-    }
+    dispatch(signInWithEmailAndPasswordStart({ email, password }))
   }
 
   const handleEmailChange = (event) => {
@@ -35,7 +32,7 @@ const SignInForm = () => {
   }
 
   const handleSignInWithGoogle = () => {
-    userAccountService.signInWithGoogleAccount()
+    dispatch(signInWithGoogleStart())
   }
 
   return (

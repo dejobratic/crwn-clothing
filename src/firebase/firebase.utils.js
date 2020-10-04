@@ -51,13 +51,22 @@ export const addCollectionAndDocuments = async (
   return await batch.commit()
 }
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe()
+      resolve(userAuth)
+    }, reject)
+  })
+}
+
 firebase.initializeApp(config)
 
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 
-const provider = new firebase.auth.GoogleAuthProvider()
-provider.setCustomParameters({ prompt: "select_account" })
-export const signInWithGoogle = () => auth.signInWithPopup(provider)
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+googleAuthProvider.setCustomParameters({ prompt: "select_account" })
+export const signInWithGoogle = () => auth.signInWithPopup(googleAuthProvider)
 
 export default firebase

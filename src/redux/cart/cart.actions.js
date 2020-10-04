@@ -3,6 +3,7 @@ export const cartAction = {
   ADD_ITEM_TO_CART: "ADD_ITEM_TO_CART",
   CLEAR_ITEM_FROM_CART: "CLEAR_ITEM_FROM_CART",
   REMOVE_ITEM_FROM_CART: "REMOVE_ITEM_FROM_CART",
+  CLEAR_CART: "CLEAR_CART",
 }
 
 export const toggleCartVisibility = () => ({
@@ -22,4 +23,8 @@ export const removeItemFromCart = (itemId) => ({
 export const clearItemFromCart = (itemId) => ({
   type: cartAction.CLEAR_ITEM_FROM_CART,
   payload: itemId,
+})
+
+export const clearCart = () => ({
+  type: cartAction.CLEAR_CART,
 })

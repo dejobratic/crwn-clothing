@@ -1,13 +1,13 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 import CartIcon from "app/components/cart-icon/CartIcon"
 import CartDropdown from "app/components/cart-dropdown/CartDropdown"
 
 import { selectCurrentUser } from "redux/user-account/user-account.selectors"
 import { selectIsCartVisible } from "redux/cart/cart.selectors"
+import { signOutStart } from "redux/user-account/user-account.actions"
 
-import { userAccountService } from "app/services/UserAccountService"
 
 import {
   HeaderContainer,
@@ -20,9 +20,10 @@ import { ReactComponent as Logo } from "app/assets/crown.svg"
 const Header = () => {
   const currentUser = useSelector(selectCurrentUser)
   const isCartVisible = useSelector(selectIsCartVisible)
+  const dispatch = useDispatch()
 
-  const handleSignOut = async () => {
-    await userAccountService.signOut()
+  const handleSignOut = () => {
+    dispatch(signOutStart())
   }
 
   return (

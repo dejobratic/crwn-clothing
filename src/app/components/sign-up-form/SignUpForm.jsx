@@ -1,10 +1,10 @@
 import React, { useState } from "react"
+import { useDispatch } from "react-redux"
 
 import FormInput from "app/components/form-input/FormInput"
 import CustomButton from "app/components/custom-button/CustomButton"
 
-import { userAccountService } from "app/services/UserAccountService"
-
+import { signUpStart } from "redux/user-account/user-account.actions"
 import "app/components/sign-up-form/sign-up-form.scss"
 
 const SignUpForm = () => {
@@ -12,6 +12,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmedPassword, setConfirmedPassword] = useState("")
+  const dispatch = useDispatch()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -20,16 +21,7 @@ const SignUpForm = () => {
       alert("Passwords do not match.")
     }
 
-    try {
-      await userAccountService.signUp({ email, password, displayName })
-
-      setDisplayName("")
-      setEmail("")
-      setPassword("")
-      setConfirmedPassword("")
-    } catch (error) {
-      console.error(error)
-    }
+    dispatch(signUpStart({ email, password, displayName }))
   }
 
   const handleDisplayNameChange = (event) => {

@@ -1,18 +1,15 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Route } from "react-router-dom"
-import { useDispatch } from "react-redux"
 
 import CollectionsOverview from "app/components/collections-overview/CollectionsOverview"
 import CollectionPage from "app/pages/collection/CollectionPage"
 
+import useDispatchAction from "app/hooks/useDispatchAction"
+
 import { loadShopCollectionsStart } from "redux/shop/shop.actions"
 
 const ShopPage = ({ match }) => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(loadShopCollectionsStart())
-  }, [dispatch])
+  useDispatchAction(loadShopCollectionsStart)
 
   return (
     <div className="shop-page">
